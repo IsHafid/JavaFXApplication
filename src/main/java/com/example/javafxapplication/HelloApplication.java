@@ -34,13 +34,24 @@ public class HelloApplication extends Application {
         Button add = new Button("Ajouter");
         Button Supp = new Button("Supprimer");
 
-        hbox.getChildren().addAll(labelName,txtFName,add,Supp);
+        Pagination pagination = new Pagination();
+
+        hbox.getChildren().addAll(labelName,txtFName,add,Supp,pagination);
 
         VBox vBox = new VBox();
 
         ListView<String> listView = new ListView<>();
         listView.getItems().addAll("Linux","Probablite","JEE");
         vBox.getChildren().add(listView);
+        pagination.setPageCount(10);
+        pagination.setCurrentPageIndex(1);
+        pagination.setMaxPageIndicatorCount(4);
+        pagination.setPageFactory((pageIndex) -> {
+
+
+            return new VBox(listView);
+        });
+
         BorderPaneRoot.setCenter(vBox);
 
         BorderPaneRoot.setTop(hbox);
